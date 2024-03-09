@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Form from './components/Form';
-import List from './components/List';
+import IssueList from './components/List';
 import "./App.css";
+import IssueForm from "./components/Form";
 
 function App() {
 
@@ -21,8 +21,8 @@ function App() {
   return (
     <div className="App">
       <h1>Issues</h1>
-      <Form onAddIssue={addIssue} />
-      <List issues={issues} setIssues={setIssues} />
+      <IssueForm onAddIssue={addIssue} />
+      <IssueList  issues={issues} setIssues={setIssues} />
     </div>
   );
 }

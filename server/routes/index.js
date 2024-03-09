@@ -50,8 +50,6 @@ router.delete("/issues/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const issues = readData();
   const filteredIssues = issues.filter((issue) => issue.id !== id);
-  console.log(issues);
-  console.log(filteredIssues);
   if (filteredIssues.length < issues.length) {
     writeData(filteredIssues);
     res.json({ message: `Issue ${id} deleted` });
