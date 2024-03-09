@@ -12,7 +12,7 @@ function App() {
      axios.get("http://localhost:3001/api/issues").then((response) => {
        setIssues(response.data);
      });
-   }, []);
+   }, [issues]);
 
   const addIssue = (newIssue) => {
     setIssues((prevIssues) => [...prevIssues, newIssue]);
