@@ -14,7 +14,7 @@ function writeData(data) {
 // Creat New Issue
 router.post("/issues", (req, res) => {
   const issues = readData();
-  const currentId = issues.length + 1;
+  const currentId = issues.length === 0 ? 1 : issues[issues.length - 1].id + 1;
   const newIssue = {
     id: currentId,
     title: req.body.title,

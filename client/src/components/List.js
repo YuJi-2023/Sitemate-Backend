@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 
-const IssueList = ({ issues, setIssues }) => {
+const IssueList = () => {
+  const [issues, setIssues] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/issues").then((response) => {
+      setIssues(response.data);
+    });
+  }, [issues]);
+
   const updateIssue = (id) => {
     const updatedIssue = {
       title: document.querySelector("#title_" + id).value,
@@ -27,23 +35,21 @@ const IssueList = ({ issues, setIssues }) => {
   };
 
   return (
-    <Container className="bg-secondary py-3">
+    <Container className="bg-secondary py-3 text-white">
       <h2>Issue List</h2>
       {issues.map((issue, index) => (
         <Card key={index}>
           <Card.Header>Issue #{issue.id}</Card.Header>
           <Card.Body>
             <Form>
-              <Form.Group
-                className="mb-3"
-              >
-                <Form.Label>Title</Form.Label>
-                <Form.Control id={`title_${issue.id}`} type="text" defaultValue={issue.title} />
+              <Form.Group className="mb-3">
+                <Form.Control
+                  id={`title_${issue.id}`}
+                  type="text"
+                  defaultValue={issue.title}
+                />
               </Form.Group>
-              <Form.Group
-                className="mb-3"
-              >
-                <Form.Label>Description</Form.Label>
+              <Form.Group className="mb-3">
                 <Form.Control
                   id={`description_${issue.id}`}
                   as="textarea"

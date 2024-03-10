@@ -4,22 +4,20 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
-const IssueForm = ({ onAddIssue }) => {
+const IssueForm = () => {
   const [newIssue, setNewIssue] = useState({ title: "", description: "" });
 
   const createIssue = () => {
     axios
       .post("http://localhost:3001/api/issues", newIssue)
       .then((response) => {
-        onAddIssue(response.data);
         setNewIssue({ title: "", description: "" });
       });
   };
 
   return (
-    <Container className="bg-secondary py-3">
-      <h3>Create Issue</h3>
-
+    <Container className="bg-secondary py-3 text-white">
+      <h3>Add New Issue</h3>
       <Form>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Title</Form.Label>
