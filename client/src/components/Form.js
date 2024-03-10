@@ -25,7 +25,6 @@ const IssueForm = ({ onAddIssue }) => {
           <Form.Label>Title</Form.Label>
           <Form.Control
             type="text"
-            placeholder="title"
             value={newIssue.title}
             onChange={(e) =>
               setNewIssue({ ...newIssue, title: e.target.value })

@@ -3,13 +3,13 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
-
+import Form from "react-bootstrap/Form";
 
 const IssueList = ({ issues, setIssues }) => {
   const updateIssue = (id) => {
     const updatedIssue = {
-      title: "Updated Issue",
-      description: "This issue has been updated",
+      title: document.querySelector("#title_" + id).value,
+      description: document.querySelector("#description_" + id).value,
     };
     axios
       .put(`http://localhost:3001/api/issues/${id}`, updatedIssue)
@@ -29,12 +29,29 @@ const IssueList = ({ issues, setIssues }) => {
   return (
     <Container className="bg-secondary py-3">
       <h2>Issue List</h2>
-      {issues.map((issue) => (
-        <Card key={issue.id}>
+      {issues.map((issue, index) => (
+        <Card key={index}>
           <Card.Header>Issue #{issue.id}</Card.Header>
           <Card.Body>
-            <Card.Title>{issue.title}</Card.Title>
-            <Card.Text>{issue.description}</Card.Text>
+            <Form>
+              <Form.Group
+                className="mb-3"
+              >
+                <Form.Label>Title</Form.Label>
+                <Form.Control id={`title_${issue.id}`} type="text" defaultValue={issue.title} />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+              >
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  id={`description_${issue.id}`}
+                  as="textarea"
+                  rows={3}
+                  defaultValue={issue.description}
+                />
+              </Form.Group>
+            </Form>
             <Button variant="success" onClick={() => updateIssue(issue.id)}>
               Update
             </Button>
